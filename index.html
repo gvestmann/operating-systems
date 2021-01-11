@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>INTRODUCTION TO FUNCTIONAL PROGRAMMING</title>
+    <title>DOCKER ON MACOS</title>
     <!-- My custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts - Nunito -->
@@ -16,64 +16,148 @@
 </head>
 <body class="animated fadeIn">
     <main class="flex-center flex-column z-depth-5">
-        <h1 class="mb-3">Introduction to functional programming</h1>
+        <h1 class="mb-3">Getting started with Docker on MacOs</h1>
         <div class="main__wrapper">
-            <h2>To start with</h2>
-            <p>Functional programming has been a buzzword for the last few years, as you can clearly see on <a href="https://trends.google.com/trends/explore?date=all&geo=US&q=%2Fm%2F02ykw">Google Trends</a>. However, it traces it's roots to early computing in the 1930's & 40's. The first purely functional programming language was created in the 1950's, LISP by IBM and has since had deep roots in academia and computer theory. Therefore, the concepts of functional programming can and have been applied to many programming languages - including Javascript. And that's what we're looking at today.</p>
+            <h2>Short introduction</h2>
+
+            <p>Docker has become quite popular in DevOps since it's release in 2013. In short, the tool is used to automate deployment of apps so it can work efficiently in different environments. The idea is that you can setup a development environment in Docker and then "ship" that environment to another person, say a software tester, inside a container, and be pretty sure your code will work pretty much the same.</p>
+
+            <p>Docker consists of four main components:</p>
+            <ul>
+                <li>The Docker client and server,</li>
+                <li>Docker images,</li>
+                <li>Docker containers, and</li>
+                <li>The Docker registry.</li>
+            </ul>
+
+            <p>Since the assingment is on operating systems, I will not go into great detail about the inner workings of docker, but in the tutorial I'll touch down on these components.</p>
+
+            <p>In the past I've setup and used Linux a few times, for fun/educational purposes. I've set it up natively or inside a virtual machine (or VitualBox). Now, although Docker will never quite be the same as using an OS natively, it's supposed to be superior in many ways to virtual machines.</p>
+
+            <p>Some of the pros of docker versus using a virtual machine, are among other things:</p>
+            <ul>
+                <li>It takes less memory space,</li>
+                <li>There performance is better,</li>           
+                <li>It boots up faster,</li>
+                <li>It's easier to setup on different OSs,</li>
+                <li>Storage can be shared - so it takes less space on your hard-drive, and</li>
+                <li>It's easier to scale up according to your needs!</li>
+            </ul>
+
+            <p>One last thing: We'll be setting this up to use Node.js. There's a handy tool called "Express App Generator" which we'll be using for this.</p>
+
+            <p>Awesome, let's just dive into this.</p>
             
-            <h2>Basic principles</h2>
-            <p>Since functional programming is a theory or idea, it's approach varies from one language to another although the same principles will apply. The most basic explanation is that functions are completely independent from the scope of the code; that is, it only takes arguments that are passed into them. Furthermore, they try to limit any changes made to other functions or variables outside their own scope. </p>
-            
-            <p>Why bother, you might ask? Well, the argument is that you can more easily debug your code. You can with more confidence, say, delete a function or replacing it, without it breaking the whole program. Since functions limit their scope, bugs are more easily spotted and squashed.</p>
-            
-            <p>Let's dig further into this.</p>
-            
-            <h2>Pure functions & side effects</h2>
-            <p>The concept pure function describes the idea the the input always gives the same output. It's isolated, so to say. That way they should have no side effects. Side effects, meaning effecting the program outside that particular functions scope. You will always know what the function will output, now it's just a matter of what you pass into it (be it parameters, methods or even other functions). We see this a lot in React with "state", where the idea is that the original data is never modified, but it's state is updated. That way, it's alway easy to get back to the original state of the data. No side effects there!</p>
-            
-            <p>A simple example: </p>
-                
+            <h2>Installing Docker</h2>
+            <p>Just a short FYI. Docker requires users running macOS 10.14 or Later. Support for macOs 11.0 (Big Sur) is already here. At the moment Intel processors are only supported, meaning the new Macbooks with Apple's M1 silicon won't work, even with using Rosetta 2 binary translator. According to Dockers blog, work on M1 support has started.</p>
+            <p>Let's head over to Docker Hub and and download <a href="https://hub.docker.com/editions/community/docker-ce-desktop-mac/">Docker Desktop for Mac</a>. Once ready, open up the .dmg-file and simply drag'n'drop the Docker.app into the Applications folder. The installed app will take up 1.4 gb of space.</p> 
+            <p>The first time you open up Docker after install, it will ask of some privleged access to work. Type in your passwork and Docker will automatically install the helper. You now need to re-open Docker. Next, you'll be greeted with a tutorial. It's a good idea to go through that quickly.</p>
             <img src="img/1.png">
-            
-            <h2>First class, high order & lambda</h2>
-            <p>These are three important concept. Firstly: First class function. These are functions have been stored in a variable and passed into or returned from other functions (Functeption?), be it 2 or 100 (but please don't put 100 in 1 function). Apparently all functions in Javascript are first-class citizens.</p>
-            
-            <p>Now, High order functions are those that take another functions as an argument or return a function as a value.</p> 
-            
-            <p>And those Lambda-thingies? Those are functions that are passed in to other functions. They can be treated like an object, meaning they are that other's function parameter. Fun fact, named after The Lambda Calculus by Alonzo Church, a pioneer on functional programming.</p>
-            
-            <h2>No X-MEN here!</h2>
-            <p>In functional programming variables should not be mutated. Mutations means that their original state has been alter. Once a variable is declared you should be sure that it will stay that way. If the variable is in fact mutated, you'll get what is called an side effect. That's pretty self-explanatory, it might affect other parts of your code.</p>
-            
+            <p>One tip: If you click the gear-icon in the top, right corner you can tune how much of your system you'd like to allow Docker to use: how many CPUs, how much RAM, how much swap space (that can be used in pretending it has more RAM; whenever Docker runs out of physical memory it stores information on your hard-drive for later use), and finally how much disk-space it's allowed to use. I'm just gonna stick with the defaults for now.</p>           
             <img src="img/2.png">
-            
-            <h2>Dealing with arrays</h2>
-            <p>Just like with variables, arrays should not be mutated according to functional programming. That means methods like pop, push, shift, sort, splice, are all a NO GO. Instead, we should use methods like map, filter, reduce to manipulate arrays.</p>
-            
-            <p>Let's look at an example were we work with map:</p>
-            
+
+            <h2>Setting up the image</h2>
+            <p>I'm gonna install the Express Generator globally, so I begin with typing in my terminal of choice:</p>
+            <code>npm install express-generator -g</code>
             <img src="img/3.png">
+            <p>Next up, we'll create a Docker app. I'm just doing this in this repo's root folder. You can put it whenever you'd like.</p>
+            <code>express docker-app</code>
+            <p>At this point we must navigate to our docker-app folder. It should be as simple as typing at this point:</p>
+            <code>cd docker-app</code>
+            <p>We can't forget package dependencies ...</p>
+            <code>npm install</code>
+            <p>And finally, we'll fire up the application!</p>
+            <code>npm start</code>
+            <p>By now, you'll be able to access you app's frontend on http://localhost:3000</p>
 
-            <p>And here's an simple example on how we can use the filter method. We're gonna find all items that belong to category #1:</p>
-
+            <h2>Make the Dockerfile</h2>
+            <p>The Dockerfile is the "manuscript" for making the inner working of docker, well ... Work. Let's create this!</p>
+            <p>In the root directory of the Docker-app (where your pwd should be by now) we'll create a file, simply called Dockerfile (no fancy .file-name stuff). </p>
+            <img src="img/3.png">
+            <p>Just like GIT, Docker has an "ignore-file", meaning: Here are some files and folders you Mr. Docker should not commit to my repo/dockerfile. This is ofcourse done to make things as small and fast as possible.
+            </p>
+            <p>To do this, you create a file called .dockerignore and place it in the root directory of the docker-app, like this:</p>
             <img src="img/4.png">
-
-            <h2>I choose to remain anonymous</h2>
-
-            <p>Finally, I'd like to touch shortly on anonymous functions. Like the name implies, those are functions that have no name. Technically, arrow functions are anonymous but they are often stored in a variable. Unlike regular functions, they cannot be called upon if they are not named or stored in a named variable. In essence they are syntactic sugar, meaning shorter, smaller and cleaner code. But they have some other pros, like being able to access variables in the parent scopes. Here are a couple of examples of anonymous functions.</p>
-
+            <p "class="smaller"">... I also added some stuff to the file. Notice, the Dockerfile is actually included in there!</p>
+            <h2>Last but not least: The base image!</h2>
+            <p>In short: the base image is the OS that Docker run on top of. Usually it's a Linux distrobution such as Ubuntu (or other Debian variants), ArchLinux, Mint, Redhat, etc. However, as mentioned before, we'll be using Alpine Linux.</p>
+            <p>To setup our OS, we'll head to the Dockerfile again an add these two lines ouf code:</p>
+            <code>FROM node:10-alpine</code>
+            <p>This FROM line imports stuff to our Docker instance, and ATM we're using Alpine and Node from the Docker registry. Think of the registry as a GitHub for Dockerfiles. There are a bunch of "repos" there you can freely. And also. you can use the registry to upload your own Dockerfiles for the community or your team to use.</p>
+            <p>We also need to add some more stuff to the Dockerfile. In the end it will look like this:</p>
+            <code># Filename: Dockerfile 
+            FROM node:10-alpine
+            WORKDIR /usr/src/app
+            COPY package*.json ./
+            RUN npm install
+            COPY . .
+            EXPOSE 3000
+            CMD ["npm", "start"]
+            Expose 3000
+            CMD ["npm, install"]
+            </code>
+            <p>Let's go through this ...</p>
+            <p>The first line is adding Alpine Linux.</p>
+            <p>The second one is the source path of Docker.</p>
+            <p>We then copy our package.json installed earlier to that said directory</p>
+            <p>Next step is installing our dependencies via "npm install". We're doing this because we want to keep our node_modules in the Docker directory for development and shippgin.</p>
+            <p>We then need to copy the stuff over to this Dockerfile's directory.</p>
+            <p>Next line to last is opening up a port (the pretty popular number 3000).</p>
+            <p>And at last, we add some command line promts to install our node_modules. That CMD line is in essence a script; the stuff withing the array, "npm + install" will be executed.</p>
+            <h2>The last step</h2>
+            <p>Last, but not least ... Let's add a tag to our images. This become very handy when dealing with many different images and makes it's easier to fire up that particular image. </p>
             <img src="img/5.png">
-
-            <p>To wrap this up ... As the name suggests, functional programming is all about functions. The idea is to keep all components as separate as possible and within functions which build on each other. More like playing with Lego rather than Playmobile. Functions can be passed around like variables, so you could assemble some sort of Functionoplis, although clean and short is encouraged in the theory of functional programming. It's supposed to be pure, have no side effects outside it scope and avoid mutation. Kind of like our drinking water.</p>
-            <footer>
-                <p class="p__smaller">Some stuff that was helpful:</p>
-                <p class="p__smaller"><a href="https://en.wikipedia.org/wiki/Functional_programming">Functional Programming @ Wikipedia</a></p>
-                <p class="p__smaller"><a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/">Free Code Camp's Functional Programming Tutorials</a></p>
-                <p class="p__smaller"><a href="https://techaffinity.com/blog/functional-programming-in-javascript-part1/">Tech Affinity - Functional Programming in Javascript</a></p>
-                <p class="p__smaller"><a href="https://medium.com/@chineketobenna/lambda-expressions-vs-anonymous-functions-in-javascript-3aa760c958ae">Lambda vs. Functional</a></p>
-                <p class="p__smaller"><a href="https://www.youtube.com/watch?v=6NPfQJJEySY">JavaScript Functional Programming Tutorial</a></p>
-                <p class="p__smaller"><a href="https://www.youtube.com/watch?v=dAPL7MQGjyMDK">What is functional programming | Easy way</a></p>
-            </footer>
+            <p>Let's type into the terminal:</p>
+            <code>docker build -t whatever-you-like-to-name-it </code>
+            <p>I named it test-docker-alpine ...</p>
+            <p>Now type: docker images in the terminal. You'll be presented with something like this:</p>
+            <img>
+            <h2>Let's run Docker</h2>
+            <p>We will now run our freshly baked Dockerimage. To do that, we typy:</p>
+            <code>docker run acb7b559077e</code>
+            <p>Huh? acb7b559077e?</p>
+            <p>Well, that's MY image id. You'll ofcourse you YOUR image id. If you just switch that out, will get - et voila! - this:</p>
+            <img src="img/6.png">
+            <img></img>
+            <p>BTW, when this happens you'll need to press CTRL + C to remove that none responsive terminal.</p>
+            <p>At this point, type: </p>
+            <code>docker exec -it "YOUR-- CONTAINER-ID" /bin/sh</code>
+            <p>But is it actually working? Well. Check out localhost. Just localhost in your browser of choice.</p>
+            <p>It should look like this ...</p>
+            <img src="img/7.png">
+            <img>
+            <p>And the Linux distro? Is it actually there?</p>
+            <p>Try typing: whoami</p>
+            <img src="img/8.png">
+            <p>That should look like this ... You should be "root" but not "your-username"</p>
+            <p>From now on, to run this Dockerfile, you'll need to remember the command </p>
+            <code>docker exec -it "YOUR-- CONTAINER-ID" /bin/sh</code>
+            <p>That will start your Docker container and easy the pain of working on your Node-application</p>
+            <h2>To end with ...</h2>
+            <p>Let's end this with having a short look on the computer's resources. Actually: this virtual machine's resources. If you type:</p>
+            <code>free</code>
+            <img src="img/9.png">
+            <p>You have info on the RAM. Notice, it's the same amount of RAM we allowed the virtual machine to use in Docker's settings.</p>
+            <p>To check which kernel Alpinu is using, type:</p>
+            <code>uname -srm</code>
+            <img src="img/10.png">
+            <p>Alpine uses 4.19.212. It's not the latest; it's from the spring of 2019. The 4.19 version is widely used, so no worries.</p>
+            <p>For checking out the processes running on your VM, you can type (just like on other Linux distros:</p>
+            <code>top</code>
+            <img src="img/11.png">
+            <p>To kill a certain process, you type (using that particular process ID or PID):</p>
+            <code>kill PROCESSNUMBER</code>
+            <img src="img/11.png">
+            <p>And finally, let's check the computer's CPU. Type:</p>
+            <code>cat /proc/cpuinfo</code>
+            <img src="img/12.png">
+            <p>You can see, just like we allowed Docker, this VM uses 2 different CPU core</p>
+            <img>
+            <p>And finally, let's check the disk's memory usage:</p>
+            <code>df -h</code>
+            <img src="img/12.png">
+            <p>Yeah, it's about 2.7 gb. I didn't limit Docker's disk usage, but obvoisly you can.</p>
+            <p>There we have it! Good luck on all your nerdy explolariton. Let's see where that takes us!</p>
         </div>
     </main>
     <!-- jQuery -->

@@ -37,15 +37,27 @@ a {
     color: lightblue
 }
 
-.main__wrapper {
-    text-align: left;
-    padding: 2rem 4rem 2rem 4rem;
-    width: 100%;
-}
-
 p {
     margin-top: 1rem !important;
     font-size: 18px !important;
+}
+
+img {
+    width: 100%;
+    margin-top: 1rem !important;
+}
+
+li {
+    text-align: left;
+    padding-top: 1rem;
+}
+
+ul {
+    padding-top: 0.5rem;
+}
+
+code {
+    margin-top: 1rem;
 }
 
 .p__smaller {
@@ -53,9 +65,10 @@ p {
     margin-bottom: 1rem !important;
 }
 
-img {
+.main__wrapper {
+    text-align: left;
+    padding: 2rem 4rem 2rem 4rem;
     width: 100%;
-    margin-top: 1rem !important;
 }
 
 .img__lame {
